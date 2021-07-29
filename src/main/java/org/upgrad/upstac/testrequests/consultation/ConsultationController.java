@@ -52,9 +52,7 @@ public class ConsultationController {
     @PreAuthorize("hasAnyRole('DOCTOR')")
     public List<TestRequest> getForConsultations()  {
 
-        // Implement this method
-
-        return testRequestQueryService.findBy(RequestStatus.LAB_TEST_COMPLETED);
+        return testRequestQueryService.findBy(RequestStatus.LAB_TEST_COMPLETED); // Returns the List of Test Results
 
         //Implement this method to get the list of test requests having status as 'LAB_TEST_COMPLETED'
         // make use of the findBy() method from testRequestQueryService class
@@ -67,7 +65,7 @@ public class ConsultationController {
     @PreAuthorize("hasAnyRole('DOCTOR')")
     public List<TestRequest> getForDoctor()  {
 
-        //Implement this method
+
         User user = userLoggedInService.getLoggedInUser();
         return testRequestQueryService.findByDoctor(user);
 
@@ -85,7 +83,6 @@ public class ConsultationController {
     @PutMapping("/assign/{id}")
     public TestRequest assignForConsultation(@PathVariable Long id) {
         TestRequest testRequest = null;
-        // Implement this method
         try {
             User userDoctor = userLoggedInService.getLoggedInUser();
             testRequest = testRequestUpdateService.assignForConsultation(id, userDoctor);
@@ -109,7 +106,6 @@ public class ConsultationController {
     public TestRequest updateConsultation(@PathVariable Long id,@RequestBody CreateConsultationRequest testResult) {
         TestRequest request = null;
         try {
-            // Implement this method
             User user = userLoggedInService.getLoggedInUser();
             request = testRequestUpdateService.updateConsultation(id, testResult, user);
 
@@ -118,10 +114,6 @@ public class ConsultationController {
             // Create an object of TestRequest class and make use of updateConsultation() method from testRequestUpdateService class
             //to update the current test request id with the testResult details by the current user(object created)
             // For reference check the method updateLabTest() method from LabRequestController class
-
-
-                // replace this line of code with your implementation
-
 
         } catch (ConstraintViolationException e) {
             throw asConstraintViolation(e);
